@@ -1,0 +1,2 @@
+-- PostgreSQL initialization script
+-- Creates initial database setup if needed
