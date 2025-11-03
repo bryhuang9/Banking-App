@@ -12,6 +12,9 @@ node_modules/
 /dist
 /.next
 /out
+backend/dist/
+frontend/dist/
+frontend/build/
 
 # Misc
 .DS_Store
@@ -21,6 +24,27 @@ node_modules/
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Documentation files (keep README.md only)
+ACCOUNT_FIX_AND_CONSISTENT_UI.md
+ALL_FIXED.md
+COMPLETE_FIX_GUIDE.md
+CREDIT_CARD_DISPLAY_FIXED.md
+DAY2_IMPLEMENTATION.md
+DEPLOYMENT_GUIDE.md
+DEPOSIT_WITHDRAW_FIXED.md
+FINAL_UI_UPDATE.md
+FIX_CARD_NOW.md
+INSANE_ANIMATIONS_FIXED.md
+LEARNING_GUIDE.md
+NEW_FEATURES_SUMMARY.md
+PROJECT_COMPLETE.md
+START_HERE.md
+backend/PHASE1_COMPLETE.md
+backend/README.md
+docs/PHASE1_GUIDE.md
+frontend/PHASE2_PROGRESS.md
+PROGRESS.md
 
 # Debug
 npm-debug.log*

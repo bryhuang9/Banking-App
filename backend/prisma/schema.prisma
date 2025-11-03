@@ -10,4 +10,168 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Add your schema models here based on DATABASE_SCHEMA.md
+// Enums
+enum Role {
+  USER
+  ADMIN
+}
+
+enum AccountType {
+  CHECKING
+  SAVINGS
+  CREDIT
+}
+
+enum CardType {
+  DEBIT
+  CREDIT
+}
+
+enum CardStatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+  EXPIRED
+}
+
+enum TransactionType {
+  DEBIT
+  CREDIT
+}
+
+enum TransactionCategory {
+  GROCERIES
+  TRANSPORTATION
+  ENTERTAINMENT
+  UTILITIES
+  HEALTHCARE
+  SHOPPING
+  DINING
+  TRAVEL
+  SALARY
+  INVESTMENT
+  TRANSFER
+  OTHER
+}
+
+enum TransferStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+// Models
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  password      String
+  firstName     String
+  lastName      String
+  phoneNumber   String?
+  dateOfBirth   DateTime?
+  address       String?
+  role          Role      @default(USER)
+  isActive      Boolean   @default(true)
+  lastLogin     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts      Account[]
+  transfersFrom Transfer[] @relation("TransferFrom")
+  transfersTo   Transfer[] @relation("TransferTo")
+
+  @@index([email])
+  @@map("users")
+}
+
+model Account {
+  id              String      @id @default(uuid())
+  accountNumber   String      @unique
+  accountType     AccountType
+  balance         Decimal     @default(0) @db.Decimal(15, 2)
+  currency        String      @default("USD")
+  isActive        Boolean     @default(true)
+  userId          String
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cards           Card[]
+  transactions    Transaction[]
+  transfersFrom   Transfer[]  @relation("AccountFrom")
+  transfersTo     Transfer[]  @relation("AccountTo")
+
+  @@index([userId])
+  @@index([accountNumber])
+  @@map("accounts")
+}
+
+model Card {
+  id              String      @id @default(uuid())
+  cardNumber      String      @unique
+  cardType        CardType
+  cardholderName  String
+  expiryDate      DateTime
+  cvv             String
+  status          CardStatus  @default(ACTIVE)
+  creditLimit     Decimal?    @db.Decimal(15, 2)
+  accountId       String
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  account         Account     @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  transactions    Transaction[]
+
+  @@index([accountId])
+  @@index([cardNumber])
+  @@map("cards")
+}
+
+model Transaction {
+  id              String              @id @default(uuid())
+  amount          Decimal             @db.Decimal(15, 2)
+  type            TransactionType
+  category        TransactionCategory @default(OTHER)
+  description     String?
+  merchant        String?
+  accountId       String
+  cardId          String?
+  balanceAfter    Decimal             @db.Decimal(15, 2)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  account         Account             @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  card            Card?               @relation(fields: [cardId], references: [id], onDelete: SetNull)
+
+  @@index([accountId])
+  @@index([cardId])
+  @@index([createdAt])
+  @@index([category])
+  @@map("transactions")
+}
+
+model Transfer {
+  id              String          @id @default(uuid())
+  amount          Decimal         @db.Decimal(15, 2)
+  description     String?
+  status          TransferStatus  @default(PENDING)
+  fromUserId      String
+  toUserId        String
+  fromAccountId   String
+  toAccountId     String
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  fromUser        User            @relation("TransferFrom", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUser          User            @relation("TransferTo", fields: [toUserId], references: [id], onDelete: Cascade)
+  fromAccount     Account         @relation("AccountFrom", fields: [fromAccountId], references: [id], onDelete: Cascade)
+  toAccount       Account         @relation("AccountTo", fields: [toAccountId], references: [id], onDelete: Cascade)
+
+  @@index([fromUserId])
+  @@index([toUserId])
+  @@index([fromAccountId])
+  @@index([toAccountId])
+  @@index([status])
+  @@map("transfers")
+}

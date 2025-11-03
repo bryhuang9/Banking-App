@@ -1,4 +1,32 @@
-# 🏦 Bank Dashboard - Full-Stack Banking Application
+# 🏦 Banking Dashboard - Full Stack Application
+
+> A modern, secure, production-ready banking dashboard with real-time data, transaction management, and beautiful UI.
+
+**Status:** ✅ Complete & Production-Ready  
+**Version:** 1.0.0  
+**Last Updated:** November 2, 2025
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-19.x-61DAFB)](https://react.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-20.x-green)](https://nodejs.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15.x-blue)](https://www.postgresql.org/)
+
+---
+
+## 📸 Screenshots
+
+### Dashboard
+![Dashboard](https://via.placeholder.com/800x450?text=Dashboard+Screenshot)
+
+### Transaction History
+![Transactions](https://via.placeholder.com/800x450?text=Transactions+Screenshot)
+
+### Profile Management
+![Profile](https://via.placeholder.com/800x450?text=Profile+Screenshot)
+
+---
+
+## 🚀 Features
 
 A modern, production-ready bank dashboard web application built with React, TypeScript, Node.js, and PostgreSQL. This project demonstrates full-stack development capabilities with enterprise-level features including authentication, real-time analytics, transaction management, and secure money transfers.
 
