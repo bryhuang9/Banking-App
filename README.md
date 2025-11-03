@@ -16,13 +16,13 @@
 ## 📸 Screenshots
 
 ### Dashboard
-![Dashboard](https://via.placeholder.com/800x450?text=Dashboard+Screenshot)
+![Dashboard](./dashboard.png)
 
 ### Transaction History
-![Transactions](https://via.placeholder.com/800x450?text=Transactions+Screenshot)
+![Transactions](./transaction.png)
 
 ### Profile Management
-![Profile](https://via.placeholder.com/800x450?text=Profile+Screenshot)
+![Profile](./profile.png)
 
 ---
 
@@ -255,16 +255,14 @@ Or view the markdown documentation: [API_ENDPOINTS.md](./docs/API_ENDPOINTS.md)
 
 ## 🎨 Screenshots
 
-> Add screenshots of your application here
-
 ### Dashboard
-![Dashboard](./docs/screenshots/dashboard.png)
+![Dashboard](./dashboard.png)
 
 ### Transactions
-![Transactions](./docs/screenshots/transactions.png)
+![Transactions](./transaction.png)
 
-### Analytics
-![Analytics](./docs/screenshots/analytics.png)
+### Profile
+![Profile](./profile.png)
 
 ## 🔐 Security Features
 
